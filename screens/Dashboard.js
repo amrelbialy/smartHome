@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet} from 'react-native';
-import {Text} from 'native-base';
+import { ScrollView, StyleSheet } from 'react-native';
+import { Text } from 'native-base';
 // import { LineChart, Path } from 'react-native-svg-charts';
 // import * as shape from 'd3-shape';
 
-import {theme} from '../theme';
-import { Block ,DashboardCard} from '../components';
+import { theme } from '../theme';
+import { Block, DashboardCard } from '../components';
 import rooms from '../rooms';
 
 class Dashboard extends Component {
@@ -24,90 +24,72 @@ class Dashboard extends Component {
     const EntranceIcon = rooms['entrance'].icon;
 
     const renderFirstRow = () => (
-      <Block
-      row
-      space="around"
-      >
-      <DashboardCard onPress={() => navigation.navigate('Bedroom')}>
-         <BedroomIcon size={100} />
+      <Block row space="around">
+        <DashboardCard onPress={() => navigation.navigate('Bedroom')}>
+          <BedroomIcon size={100} />
           <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['bedroom'].name}
+            {rooms['bedroom'].name}
           </Text>
-       </DashboardCard>
+        </DashboardCard>
 
-    
-        <DashboardCard  onPress={() => navigation.navigate('Garage')}>
-           <GarageIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['garage'].name}
-            </Text>
-       </DashboardCard>
-    </Block>
-    )
+        <DashboardCard onPress={() => navigation.navigate('Garage')}>
+          <GarageIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['garage'].name}
+          </Text>
+        </DashboardCard>
+      </Block>
+    );
 
-    const renderSecondRow = ()=> (
-      <Block
-      row
-      space="around"
-      >
-        <DashboardCard   onPress={() => navigation.navigate('Garden')}>
-           <GardenIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['garden'].name}
-            </Text>
-       </DashboardCard>
-      
-       <DashboardCard   onPress={() => navigation.navigate('Kitchen')}>
-       <KitchenIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['kitchen'].name}
-            </Text>
-       </DashboardCard>
-    
-    </Block>
-    )
+    const renderSecondRow = () => (
+      <Block row space="around">
+        <DashboardCard onPress={() => navigation.navigate('Garden')}>
+          <GardenIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['garden'].name}
+          </Text>
+        </DashboardCard>
+
+        <DashboardCard onPress={() => navigation.navigate('Kitchen')}>
+          <KitchenIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['kitchen'].name}
+          </Text>
+        </DashboardCard>
+      </Block>
+    );
 
     const renderThirdRow = () => (
-      <Block
-      row
-      space="around"
-      >
-         <DashboardCard   onPress={() => navigation.navigate('LivingRoom')}>
-         <LivingRoomIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['livingRoom'].name}
-            </Text>
-       </DashboardCard>
+      <Block row space="around">
+        <DashboardCard onPress={() => navigation.navigate('LivingRoom')}>
+          <LivingRoomIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['livingRoom'].name}
+          </Text>
+        </DashboardCard>
 
-       <DashboardCard   onPress={() => navigation.navigate('Bathroom')}>
-         <BathroomIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['bathroom'].name}
-            </Text>
-       </DashboardCard>
-    </Block>
-    )
+        <DashboardCard onPress={() => navigation.navigate('Bathroom')}>
+          <BathroomIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['bathroom'].name}
+          </Text>
+        </DashboardCard>
+      </Block>
+    );
 
     const renderFourthRow = () => (
-      <Block
-      row
-      space="around"
-      >
-         <DashboardCard   onPress={() => navigation.navigate('Entrance')}>
-         <EntranceIcon size={100} />
-            <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
-              {rooms['entrance'].name}
-            </Text>
-       </DashboardCard>
-
-    </Block>
-    )
+      <Block row space="around">
+        <DashboardCard onPress={() => navigation.navigate('Entrance')}>
+          <EntranceIcon size={100} />
+          <Text button style={{ marginTop: theme.sizes.base * 0.5 }}>
+            {rooms['entrance'].name}
+          </Text>
+        </DashboardCard>
+      </Block>
+    );
     return (
       <Block style={styles.dashboard}>
-     
-        <ScrollView
-          contentContainerStyle={styles.mainStyles}
-          showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={styles.mainStyles} showsVerticalScrollIndicator={false}>
           <Block column space="between">
             {renderFirstRow()}
             {renderSecondRow()}
@@ -126,9 +108,7 @@ Dashboard.navigationOptions = () => {
   };
 };
 
-Dashboard.defaultProps = {
-  
-};
+Dashboard.defaultProps = {};
 
 export default Dashboard;
 
@@ -144,6 +124,4 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: -theme.sizes.base * 6,
   },
-  
-
 });

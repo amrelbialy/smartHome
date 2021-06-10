@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prettier": "prettier '**/*.js'"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
@@ -34,12 +35,18 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/runtime": "^7.14.0",
-    "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^27.0.1",
-    "eslint": "^7.27.0",
+    "eslint": "^7.28.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "^3.11.0",
     "jest": "^27.0.1",
     "metro-react-native-babel-preset": "^0.66.0",
+    "prettier": "2.2.1",
     "react-test-renderer": "17.0.1"
   },
   "jest": {

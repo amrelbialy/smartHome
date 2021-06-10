@@ -45,7 +45,6 @@ export default class App extends Component{
     ])
     .then((values) => {
       const [ isEnabled, devices ] = values
- 
       this.setState({ isEnabled, devices })
     })
  
@@ -238,7 +237,7 @@ export default class App extends Component{
     return (
       <View style={styles.container}>
       <View style={styles.toolbar}>
-            <Text style={styles.toolbarTitle}>Bluetooth Device List</Text>
+            <Text style={styles.toolbarTitle}>Bluetooth Devices</Text>
             <View style={styles.toolbarButton}>
               <Switch
                 value={this.state.isEnabled}
@@ -269,36 +268,6 @@ export default class App extends Component{
              keyExtractor={item => item.id}
              renderItem={(item) => this._renderItem(item)}
            />
-           <Button
-             onPress={this.toggleSwitchLivingRoom.bind(this)}
-             title="SwitchLightLivingRoom(On/Off)"
-             color="#841584"
-             
-           />
-           <Button
-             onPress={this.toggleDoorGarage.bind(this)}
-             title="SwitchDoorGarage(On/Off)"
-             color="red"
-           />
-
-            <Button
-             onPress={this.toggleCurtainLivingRoom.bind(this)}
-             title="SwitchCurtain(On/Off)"
-             color="black"
-           />
-
-           <Button
-             onPress={this.toggleGardenPump.bind(this)}
-             title="SwitchBump(On/Off)"
-             color="orange"
-           />
-
-            <Button
-             onPress={this.toggleFan.bind(this)}
-             title="SwitchFan (On/Off)"
-             color="green"
-           />
-
         </>
       )} 
    

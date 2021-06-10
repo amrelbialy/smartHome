@@ -13,6 +13,7 @@ import Bathroom from '../rooms/Bathroom';
 import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
 import Blutooth from '../components/Blutooth'
+import PairedDevices from '../screens/Blutooth/PairedDevices';
 
  const SmartHome = createStackNavigator(
   {
@@ -26,10 +27,11 @@ import Blutooth from '../components/Blutooth'
     Bathroom,
     Entrance, 
     Settings,
-    Blutooth
+    Blutooth,
+    PairedDevices
     },
   {
-    initialRouteName: 'Blutooth',
+    initialRouteName: 'PairedDevices',
   } 
 );
 
