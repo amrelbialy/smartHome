@@ -1,21 +1,21 @@
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import {createBottomTabNavigatior} from 'react-navigation-tabs'
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import Login from '../screens/Login'
+import Login from '../screens/Login';
 import Dashboard from '../screens/Dashboard';
 import Settings from '../screens/Settings.js';
-import Bedroom from '../rooms/Bedroom'
+import Bedroom from '../rooms/Bedroom';
 import LivingRoom from '../rooms/LivingRoom';
 import Kitchen from '../rooms/Kitchen';
 import Garage from '../rooms/Garage';
 import Bathroom from '../rooms/Bathroom';
 import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
-import Blutooth from '../components/Blutooth'
+import Blutooth from '../components/Blutooth';
 import PairedDevices from '../screens/Blutooth/PairedDevices';
 
- const SmartHome = createStackNavigator(
+const SmartHome = createStackNavigator(
   {
     // Login,
     Dashboard,
@@ -25,19 +25,19 @@ import PairedDevices from '../screens/Blutooth/PairedDevices';
     Kitchen,
     LivingRoom,
     Bathroom,
-    Entrance, 
+    Entrance,
     Settings,
     Blutooth,
-    PairedDevices
-    },
+    PairedDevices,
+  },
   {
     initialRouteName: 'PairedDevices',
-  } 
+  }
 );
 
-// const Tabs = createBottomTabNavigatior({
-//   Dashboard: SmartHome,
-//   Blutooth: Blutooth
-// })
+const Tabs = createBottomTabNavigator({
+  Dashboard: SmartHome,
+  PairedDevices,
+});
 
-export default createAppContainer(SmartHome)
+export default createAppContainer(SmartHome);
