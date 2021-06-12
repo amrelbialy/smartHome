@@ -1,36 +1,62 @@
-import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-paper'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import BackButton from '../components/BackButton'
-import { theme } from '../theme'
-import { emailValidator, passwordValidator } from '../utils/loginValidation'
+import React, { useState, useEffect } from 'react';
+import { TouchableOpacity, StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
+import { Text } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
 
+import Header from '../components/Header';
+import Button from '../components/Button';
+import TextInput from '../components/TextInput';
+
+import { theme } from '../theme';
+import { emailValidator, passwordValidator } from '../utils/loginValidation';
+import * as authActions from '../store/actions/auth';
 
 export default function LoginScreen({ navigation }) {
-  
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState({ value: '', error: '' });
+  const [password, setPassword] = useState({ value: '', error: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const dispatch = useDispatch();
 
-  const onLoginPressed = () => {
-    const emailError = emailValidator(email.value)
-    const passwordError = passwordValidator(password.value)
+  const onLoginPress = () => {
+    const emailError = emailValidator(email.value);
+    const passwordError = passwordValidator(password.value);
     if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError })
-      setPassword({ ...password, error: passwordError })
-      return
+      setEmail({ ...email, error: emailError });
+      setPassword({ ...password, error: passwordError });
+    } else {
+      loginHandler();
     }
-    navigation.navigate('Dashboard')
-  }
-//  <BackButton goBack={navigation.goBack} />
-//       <Logo />
+  };
+  const loginHandler = async () => {
+    // let action;
+    // if (isSignup) {
+    //   action = authActions.signup(formState.inputValues.email, formState.inputValues.password);
+    // } else {
+    //   action = authActions.login(email, password);
+    // }
+    setError(null);
+    setIsLoading(true);
+    try {
+      await dispatch(authActions.login(email.value, password.value));
+      navigation.navigate('Dashboard');
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
+    }
+  }, [error]);
+  //  <BackButton goBack={navigation.goBack} />
+  //       <Logo />
   return (
     <View style={styles.container}>
-     <Header>Please Log in</Header>
+      <Header>Please Log in</Header>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -53,15 +79,17 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate('ResetPasswordScreen')}>
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
-         <Text>Login</Text>
-      </Button>
+      {isLoading ? (
+        <ActivityIndicator size="large" color={theme.colors.accent} />
+      ) : (
+        <Button mode="contained" onPress={onLoginPress}>
+          <Text style={{ color: 'white' }}>Login</Text>
+        </Button>
+      )}
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
@@ -69,18 +97,17 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-
   container: {
-      alignItems: 'center',
+    alignItems: 'center',
     alignSelf: 'center',
     backgroundColor: theme.colors.surface,
-   
+
     flex: 1,
-   
+
     justifyContent: 'center',
     maxWidth: 340,
     padding: 20,
@@ -103,4 +130,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 4,
   },
-})
+});

@@ -1,10 +1,21 @@
 import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { View ,Text} from 'react-native';
-import SmartHome from './navigation/SmartHome';
 
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
+import NavigationContainer from './navigation/NavigationContainer';
+import authReducer from './store/reducers/auth';
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default function App() {
-  return <SmartHome/>;
+  return (
+    <Provider store={store}>
+      <NavigationContainer />
+    </Provider>
+  );
 }
-

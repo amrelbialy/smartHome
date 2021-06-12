@@ -1,6 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -17,7 +17,8 @@ import Garage from '../rooms/Garage';
 import Bathroom from '../rooms/Bathroom';
 import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
-import BlutoothOld from '../components/BlutoothOld';
+import StartupScreen from '../screens/StartUpScreen';
+
 import Blutooth from '../screens/Blutooth';
 
 const SmartHome = createStackNavigator(
@@ -104,4 +105,27 @@ const Tabs = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(Tabs);
+const LoginNavigator = createStackNavigator(
+  {
+    Login,
+  },
+  {
+    initialRouteName: 'Login',
+  }
+);
+
+const StartUpNavigator = createStackNavigator(
+  {
+    StartupScreen,
+  },
+  {
+    initialRouteName: 'StartupScreen',
+  }
+);
+
+const MainNavigatior = createSwitchNavigator({
+  Startup: StartUpNavigator,
+  Login: LoginNavigator,
+  Tabs,
+});
+export default createAppContainer(MainNavigatior);
