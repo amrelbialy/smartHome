@@ -6,19 +6,19 @@ import { theme } from '../theme';
 import { Block, Text, PanSlider } from '../components';
 import rooms from '../rooms';
 
-const Settings = () => (
+const Alarm = () => (
   <Block flex={1} style={styles.settings}>
-    <Text>this is settings</Text>
+    <Text>this is Alarm</Text>
   </Block>
 );
 
-Settings.navigationOptions = () => ({
-  headerTitle: 'Settings',
+Alarm.navigationOptions = () => ({
+  headerTitle: 'Alarm',
 });
 
-Settings.defaultProps = {};
+Alarm.defaultProps = {};
 
-export default Settings;
+export default Alarm;
 
 const styles = StyleSheet.create({
   settings: {
