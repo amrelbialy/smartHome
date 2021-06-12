@@ -1,22 +1,15 @@
 import React from 'react';
-import { View,Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Content, Card, CardItem, Body, Switch } from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { theme } from '../theme';
 
-const LightCard = ({label,toggleSwitch,isEnabled,...props})=> {
-  return (
-    <Card>
+const LightCard = ({ label, toggleSwitch, isEnabled, ...props }) => (
+  <Card>
     <CardItem header bordered style={styles.lightHeader}>
-      <Content
-        contentContainerStyle={styles.contentStyle}>
-        <MaterialCommunityIcons
-          size={20}
-          color={theme.colors.accent}
-          name="lightbulb"
-          {...props}
-        />
+      <Content contentContainerStyle={styles.contentStyle}>
+        <MaterialCommunityIcons size={20} color={theme.colors.accent} name="lightbulb" {...props} />
         <Text>Lights</Text>
       </Content>
       <Switch
@@ -33,20 +26,14 @@ const LightCard = ({label,toggleSwitch,isEnabled,...props})=> {
       </Body>
     </CardItem>
   </Card>
-    );
+);
 
-}
-
-
-
-LightCard.defaultProps = {
-   
-};
+LightCard.defaultProps = {};
 
 export default LightCard;
 
 const styles = StyleSheet.create({
-  contentStyle : {
+  contentStyle: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',

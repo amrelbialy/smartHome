@@ -12,8 +12,8 @@ import Garage from '../rooms/Garage';
 import Bathroom from '../rooms/Bathroom';
 import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
-import Blutooth from '../components/Blutooth';
-import PairedDevices from '../screens/Blutooth/PairedDevices';
+import BlutoothOld from '../components/BlutoothOld';
+import Blutooth from '../screens/Blutooth';
 
 const SmartHome = createStackNavigator(
   {
@@ -28,16 +28,15 @@ const SmartHome = createStackNavigator(
     Entrance,
     Settings,
     Blutooth,
-    PairedDevices,
   },
   {
-    initialRouteName: 'PairedDevices',
+    initialRouteName: 'Blutooth',
   }
 );
 
 const Tabs = createBottomTabNavigator({
   Dashboard: SmartHome,
-  PairedDevices,
+  Blutooth,
 });
 
 export default createAppContainer(SmartHome);

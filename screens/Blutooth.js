@@ -6,24 +6,30 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
+  Button,
+  View,
 } from 'react-native';
 // import {Text} from 'native-base';
 // import { LineChart, Path } from 'react-native-svg-charts';
 // import * as shape from 'd3-shape';
-import { Content, Text, Card, CardItem, Body, Switch } from 'native-base';
+import { Content, Text, Card, CardItem, Body, Switch, Right } from 'native-base';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BluetoothSerial from 'react-native-bluetooth-serial';
-import { theme } from '../../theme';
-import { Block } from '../../components';
+import { theme } from '../theme';
+import { Block } from '../components';
+
+const _ = require('lodash');
 // import rooms from '../rooms';
 
-const PairedDevices = (props) => {
+const Blutooth = (props) => {
   const [blutoothEnabled, setBlutooth] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pairedDevices, setPairedDevices] = useState([]);
   const [connecting, setConnecting] = useState(false);
   const [connectedDevice, setConnectedDevice] = useState({});
   const [deviceToConnect, setDeviceToConnect] = useState({});
+  const [discovering, setDiscovering] = useState(false);
+  const [availableDevices, setAvailableDevices] = useState([]);
 
   useEffect(() => {
     // Promise.all([BluetoothSerial.isEnabled(), BluetoothSerial.list()]).then((values) => {
@@ -88,9 +94,23 @@ const PairedDevices = (props) => {
     if (value === true) {
       setLoading(true);
       enable();
+      discoverAvailableDevices();
     } else {
       disable();
     }
+  };
+
+  const discoverAvailableDevices = () => {
+    setDiscovering(true);
+    BluetoothSerial.discoverUnpairedDevices()
+      .then((unpairedDevices) => {
+        const uniqueDevices = _.uniqBy(unpairedDevices, 'id');
+
+        setAvailableDevices(uniqueDevices);
+
+        setDiscovering(false);
+      })
+      .catch((err) => console.log(err.message));
   };
 
   const connect = (device) => {
@@ -118,15 +138,16 @@ const PairedDevices = (props) => {
   // console.log('blutoothEnabled', blutoothEnabled);
   // console.log('loading', loading);
   // console.log('pairedDevices', pairedDevices);
+  console.log('availableDevieces', availableDevices);
 
   const renderItem = (item) => (
     <TouchableOpacity onPress={() => connect(item.item)}>
-      <Card>
-        <CardItem header bordered style={styles.doorHeader}>
-          <Content contentContainerStyle={styles.contentStyle}>
-            <Entypo size={20} color={theme.colors.accent} name="mobile" {...props} />
-            <Text>{item.item.name ? item.item.name : item.item.id}</Text>
-          </Content>
+      <View style={styles.list}>
+        <Entypo size={20} color={theme.colors.accent} name="mobile" {...props} />
+
+        <View style={styles.bordered}>
+          <Text>{item.item.name ? item.item.name : item.item.id}</Text>
+
           {connecting &&
             item.item.id === deviceToConnect.id &&
             item.item.name === deviceToConnect.name && (
@@ -140,65 +161,93 @@ const PairedDevices = (props) => {
                 <Entypo size={20} color={theme.colors.accent} name="check" {...props} />
               </Block>
             )}
-        </CardItem>
-      </Card>
+        </View>
+      </View>
     </TouchableOpacity>
   );
+
+  const renderTitle = () => (
+    <Block style={styles.toolbar}>
+      <Text style={styles.toolbarTitle}>Bluetooth </Text>
+      <Block style={styles.toolbarButton}>
+        <Switch
+          trackColor={{ false: '#767577', true: `${theme.colors.accent}` }}
+          thumbColor="#f4f3f4"
+          ios_backgroundColor="#3e3e3e"
+          value={blutoothEnabled}
+          onValueChange={(val) => toggleBluetooth(val)}
+        />
+      </Block>
+    </Block>
+  );
+
+  const renderPairedSection = () => (
+    <Block style={styles.wrapper}>
+      <Card>
+        <CardItem bordered>
+          <Text>Paired Devices</Text>
+        </CardItem>
+        <CardItem>
+          <FlatList
+            style={{ flex: 1, height: 200 }}
+            data={pairedDevices}
+            keyExtractor={(item) => item.id}
+            renderItem={(item) => renderItem(item)}
+          />
+        </CardItem>
+      </Card>
+    </Block>
+  );
+
+  const renderAvailableSection = () => (
+    <View>
+      <Card>
+        <CardItem bordered style={styles.availableDevices}>
+          <Text>Available Devices</Text>
+          {discovering && <ActivityIndicator size="small" color={theme.colors.accent} />}
+        </CardItem>
+        <CardItem>
+          <FlatList
+            style={{ flex: 1, height: 300 }}
+            data={availableDevices}
+            keyExtractor={(item) => item.id}
+            renderItem={(item) => renderItem(item)}
+          />
+        </CardItem>
+      </Card>
+    </View>
+  );
+
   return (
     <>
-      <Block style={styles.toolbar}>
-        <Text style={styles.toolbarTitle}>Bluetooth </Text>
-        <Block style={styles.toolbarButton}>
-          <Switch
-            trackColor={{ false: '#767577', true: `${theme.colors.accent}` }}
-            thumbColor="#f4f3f4"
-            ios_backgroundColor="#3e3e3e"
-            value={blutoothEnabled}
-            onValueChange={(val) => toggleBluetooth(val)}
-          />
-        </Block>
-      </Block>
+      {renderTitle()}
       {loading && (
         <Block style={styles.loading}>
           <ActivityIndicator size="large" color={theme.colors.accent} />
         </Block>
       )}
+
       {blutoothEnabled ? (
-        <Block style={styles.wrapper}>
-          <FlatList
-            style={{ flex: 1 }}
-            data={pairedDevices}
-            keyExtractor={(item) => item.id}
-            renderItem={(item) => renderItem(item)}
-          />
-        </Block>
+        <>
+          {renderPairedSection()}
+          {renderAvailableSection()}
+        </>
       ) : (
-        !loading && (
-          <Block style={styles.blutoothClosed}>
-            <Text>Open bluetooth</Text>
-          </Block>
-        )
+        <Block style={styles.blutoothClosed}>
+          <Text>No paired devices</Text>
+        </Block>
       )}
     </>
   );
 };
 
-PairedDevices.navigationOptions = (navData) => ({
-  headerTitle: 'Paired Devices',
-  // headerRight: (
-  //   <Switch
-  //     trackColor={{ false: '#767577', true: `${theme.colors.accent}` }}
-  //     thumbColor="#f4f3f4"
-  //     ios_backgroundColor="#3e3e3e"
-  //     // onValueChange={()=>screenProps.toggleBluetooth()}
-  //     // value={screenProps.blutoothEnabled}
-  //   />
-  // ),
+Blutooth.navigationOptions = (navData) => ({
+  headerTitle: 'Blutooth Connection',
 });
 
-PairedDevices.defaultProps = {};
+Blutooth.defaultProps = {};
 
-export default PairedDevices;
+export default Blutooth;
 
 const styles = StyleSheet.create({
   blutoothClosed: {
@@ -211,14 +260,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
   },
-  doorHeader: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
+
   // eslint-disable-next-line react-native/no-color-literals
   wrapper: {
-    flex: 1,
-    marginBottom: -theme.sizes.base * 6,
+    marginTop: 10,
+    marginBottom: 10,
     padding: 0,
   },
   toolbar: {
@@ -240,5 +286,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  list: {
+    flex: 1,
+    flexDirection: 'row',
+    borderColor: '#e8e8e8',
+    padding: 10,
+    borderBottomWidth: 1,
+  },
+  bordered: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginLeft: 5,
+  },
+  availableDevices: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
