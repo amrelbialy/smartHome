@@ -234,7 +234,7 @@ const Blutooth = (props) => {
         </>
       ) : (
         <Block style={styles.blutoothClosed}>
-          <Text>No paired devices</Text>
+          <Text>Please open bluetooth on your device first</Text>
         </Block>
       )}
     </>

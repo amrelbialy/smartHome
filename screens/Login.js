@@ -78,11 +78,7 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity onPress={() => navigation.navigate('ResetPasswordScreen')}>
-          <Text style={styles.forgot}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
+
       {isLoading ? (
         <ActivityIndicator size="large" color={theme.colors.accent} />
       ) : (
@@ -92,7 +88,7 @@ export default function LoginScreen({ navigation }) {
       )}
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+        <TouchableOpacity onPress={() => navigation.replace('SignUp')}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>

@@ -1,54 +1,47 @@
 import React from 'react';
-import { View,Text, StyleSheet} from 'react-native';
-import { Content, Card, CardItem, Body, Switch } from 'native-base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Content, Card, CardItem, Body } from 'native-base';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import { theme } from '../theme';
 
-const DoorCard = ({label,toggleSwitch,isEnabled,...props})=> {
-  return (
-    <Card>
+// eslint-disable-next-line react/prop-types
+const DoorCard = ({ label, toggleSwitch, isEnabled }) => (
+  <Card>
     <CardItem header bordered style={styles.doorHeader}>
-      <Content
-        contentContainerStyle={styles.contentStyle}>
-        <MaterialCommunityIcons
-          size={20}
-          color={theme.colors.accent}
-          name="door"
-          {...props}
-        />
-        <Text>{label || 'Door'}</Text>
+      <Content contentContainerStyle={styles.contentStyle}>
+        <Text style={styles.textStyle}>{label || 'Door'}</Text>
       </Content>
-      <Switch
-        trackColor={{ false: '#767577', true: `${theme.colors.accent}` }}
-        thumbColor="#f4f3f4"
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={()=>toggleSwitch()}
-        value={isEnabled}
-      />
     </CardItem>
- 
+    <CardItem header bordered>
+      <Body style={styles.bodyStyle}>
+        <TouchableOpacity onPress={() => toggleSwitch()}>
+          <FontAwesome5
+            size={100}
+            color={theme.colors.accent}
+            name={isEnabled ? 'door-open' : 'door-closed'}
+          />
+        </TouchableOpacity>
+      </Body>
+    </CardItem>
   </Card>
-    );
+);
 
-}
-
-
-
-DoorCard.defaultProps = {
-   
-};
+DoorCard.defaultProps = {};
 
 export default DoorCard;
 
 const styles = StyleSheet.create({
-  contentStyle : {
+  contentStyle: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
-  doorHeader: {
-    flex: 1,
-    justifyContent: 'space-between',
+  textStyle: {
+    fontSize: 20,
+  },
+  bodyStyle: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

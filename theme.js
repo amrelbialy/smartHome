@@ -2,7 +2,7 @@ import { DefaultTheme } from 'react-native-paper';
 
 const colors = {
   text: '#000000',
-  accent: '#FE5F55',
+  accent: '#161c24', // '#141414'
   black: '#292934',
   white: '#FFFFFF',
   gray: '#A7A7A7',
@@ -15,9 +15,9 @@ const colors = {
 const sizes = {
   base: 14,
   font: 14,
-  welcome: 18,
+  welcome: 12,
   name: 21,
-  h1: 140,
+  h1: 85,
   button: 16,
 };
 

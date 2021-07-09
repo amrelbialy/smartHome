@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text } from 'native-base';
+// import { Text } from 'native-base';
 // import { LineChart, Path } from 'react-native-svg-charts';
 // import * as shape from 'd3-shape';
 
 import { theme } from '../theme';
-import { Block, DashboardCard } from '../components';
+import { Block, DashboardCard, IotCard, Text } from '../components';
 import rooms from '../rooms';
 
 class Dashboard extends Component {
@@ -90,7 +90,12 @@ class Dashboard extends Component {
     return (
       <Block style={styles.dashboard}>
         <ScrollView contentContainerStyle={styles.mainStyles} showsVerticalScrollIndicator={false}>
-          <Block column space="between">
+          <Block column space="between" style={{ marginHorizontal: theme.sizes.base * 2 }}>
+            <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
+              <Text style={{ fontSize: 30, color: '#A7A7A7' }}>Hello,</Text>
+              <Text style={{ fontSize: 50, fontWeight: '700' }}>Amr!</Text>
+            </Block>
+            <IotCard />
             {renderFirstRow()}
             {renderSecondRow()}
             {renderThirdRow()}
@@ -104,7 +109,7 @@ class Dashboard extends Component {
 
 Dashboard.navigationOptions = () => {
   return {
-    headerTitle: 'All Rooms',
+    headerTitle: 'Dashboard',
   };
 };
 
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   mainStyles: {
-    flex: 1,
+    height: 1250,
     marginBottom: -theme.sizes.base * 6,
   },
 });

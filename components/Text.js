@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text } from 'react-native'
-import {theme} from '../theme';
+/* eslint-disable react/prefer-stateless-function */
+import React, { Component } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { theme } from '../theme';
 
 export default class Typography extends Component {
   render() {
@@ -46,14 +47,14 @@ export default class Typography extends Component {
       height && { lineHeight: height },
       weight && { fontWeight: weight },
       spacing && { letterSpacing: spacing },
-      style
+      style,
     ];
 
     return (
       <Text style={textStyles} {...props}>
         {children}
       </Text>
-    )
+    );
   }
 }
 
@@ -66,9 +67,9 @@ const styles = StyleSheet.create({
   light: { fontWeight: '200' },
   center: { textAlign: 'center' },
   right: { textAlign: 'right' },
-  black: { color: theme.colors.black, },
-  white: { color: theme.colors.white, },
-  gray: { color: theme.colors.gray, },
+  black: { color: theme.colors.black },
+  white: { color: theme.colors.white },
+  gray: { color: theme.colors.gray },
   welcome: theme.fonts.welcome,
   name: theme.fonts.name,
   h1: theme.fonts.h1,

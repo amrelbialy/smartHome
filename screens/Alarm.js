@@ -1,22 +1,29 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, Slider } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { StyleSheet } from 'react-native';
 
+import { useDispatch } from 'react-redux';
 import { theme } from '../theme';
-import { Block, Text, PanSlider } from '../components';
-import rooms from '../rooms';
+import { Block, Text } from '../components';
 
-const Alarm = () => (
-  <Block flex={1} style={styles.settings}>
-    <Text>this is Alarm</Text>
-  </Block>
-);
+import Button from '../components/Button';
+
+const Alarm = () => {
+  const handleAlarm = () => {
+    console.log('alarmoff');
+  };
+
+  return (
+    <Block flex={1} style={styles.settings}>
+      <Button mode="contained" onPress={() => handleAlarm()}>
+        <Text style={{ color: 'white' }}>Alarm Off</Text>
+      </Button>
+    </Block>
+  );
+};
 
 Alarm.navigationOptions = () => ({
   headerTitle: 'Alarm',
 });
-
-Alarm.defaultProps = {};
 
 export default Alarm;
 
@@ -24,7 +31,4 @@ const styles = StyleSheet.create({
   settings: {
     padding: theme.sizes.base * 2,
   },
-  // slider: {
-
-  // }
 });

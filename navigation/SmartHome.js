@@ -18,7 +18,7 @@ import Bathroom from '../rooms/Bathroom';
 import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
 import StartupScreen from '../screens/StartUpScreen';
-
+import SignUp from '../screens/SignUp';
 import Blutooth from '../screens/Blutooth';
 
 const SmartHome = createStackNavigator(
@@ -108,6 +108,7 @@ const Tabs = createBottomTabNavigator(
 const LoginNavigator = createStackNavigator(
   {
     Login,
+    SignUp,
   },
   {
     initialRouteName: 'Login',
@@ -124,8 +125,8 @@ const StartUpNavigator = createStackNavigator(
 );
 
 const MainNavigatior = createSwitchNavigator({
-  Startup: StartUpNavigator,
-  Login: LoginNavigator,
+  // Startup: StartUpNavigator,
+  // Login: LoginNavigator,
   Tabs,
 });
 export default createAppContainer(MainNavigatior);

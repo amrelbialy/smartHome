@@ -1,25 +1,25 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Content, Card, CardItem, Body } from 'native-base';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import { theme } from '../theme';
 
 // eslint-disable-next-line react/prop-types
-const PumpCard = ({ toggleSwitch, isEnabled }) => (
+const AlarmCard = ({ toggleSwitch, isEnabled }) => (
   <Card>
-    <CardItem header bordered style={styles.pumpHeader}>
+    <CardItem header bordered style={styles.alarmHeader}>
       <Content contentContainerStyle={styles.contentStyle}>
-        <Text style={styles.textStyle}>Pump</Text>
+        <Text style={styles.textStyle}>Alarm</Text>
       </Content>
     </CardItem>
     <CardItem bordered>
       <Body style={styles.bodyStyle}>
         <TouchableOpacity onPress={() => toggleSwitch()}>
-          <MaterialCommunityIcons
+          <Ionicons
             size={100}
             color={theme.colors.accent}
-            name={isEnabled ? 'water-pump' : 'water-pump-off'}
+            name={isEnabled ? 'alarm' : 'alarm-outline'}
           />
         </TouchableOpacity>
       </Body>
@@ -27,9 +27,9 @@ const PumpCard = ({ toggleSwitch, isEnabled }) => (
   </Card>
 );
 
-PumpCard.defaultProps = {};
+AlarmCard.defaultProps = {};
 
-export default PumpCard;
+export default AlarmCard;
 
 const styles = StyleSheet.create({
   contentStyle: {
@@ -37,10 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  label: {
-    marginLeft: 4,
-  },
-  pumpHeader: {
+  alarmHeader: {
     flex: 1,
     justifyContent: 'space-between',
   },
