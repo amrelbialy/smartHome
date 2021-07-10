@@ -1,5 +1,6 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   TouchableOpacity,
   ToastAndroid,
@@ -17,9 +18,11 @@ import BluetoothSerial from 'react-native-bluetooth-serial';
 import { theme } from '../theme';
 import { Block } from '../components';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+const _ = require('lodash');
 // import rooms from '../rooms';
 
-const Bluetooth = (props) => {
+const Bluetooth = () => {
   const [blutoothEnabled, setBlutooth] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pairedDevices, setPairedDevices] = useState([]);
@@ -29,42 +32,14 @@ const Bluetooth = (props) => {
   const [discovering, setDiscovering] = useState(false);
   const [availableDevices, setAvailableDevices] = useState([]);
 
-  useEffect(() => {
-    // Promise.all([BluetoothSerial.isEnabled(), BluetoothSerial.list()]).then((values) => {
-    //   const [isEnabled, devices] = values;
-    //   // setBlutooth(isEnabled);
-    //   // setPairedDevices(devices);
-    //   setPairedDevices(devices);
-    //   setLoading(false);
-    // });
-    // BluetoothSerial.on('bluetoothEnabled', () => {
-    //   Promise.all([BluetoothSerial.isEnabled(), BluetoothSerial.list()]).then((values) => {
-    //     console.log('values', values);
-    //     const [devices] = values;
-    //     setPairedDevices(devices);
-    //     setLoading(false);
-    //   });
-    //   BluetoothSerial.on('bluetoothDisabled', () => {
-    //     setPairedDevices([]);
-    //   });
-    //   BluetoothSerial.on('error', (err) =>
-    //     ToastAndroid.showWithGravity(
-    //       `Error: ${err.message}`,
-    //       ToastAndroid.SHORT,
-    //       ToastAndroid.CENTER
-    //     )
-    //   );
-    // });
-  }, [blutoothEnabled]);
-
   const enable = () => {
     BluetoothSerial.enable()
-      .then((res) => {
+      .then(() => {
         BluetoothSerial.list().then((res) => {
           if (res.length === 0) {
-          } else {
-            setPairedDevices(res);
+            return;
           }
+          setPairedDevices(res);
 
           setBlutooth(true);
           setLoading(false);
@@ -79,7 +54,7 @@ const Bluetooth = (props) => {
 
   const disable = () => {
     BluetoothSerial.disable()
-      .then((res) => {
+      .then(() => {
         // setPairedDevices([]);
         setBlutooth(false);
       })
@@ -115,7 +90,7 @@ const Bluetooth = (props) => {
     setConnecting(true);
     setDeviceToConnect(device);
     BluetoothSerial.connect(device.id)
-      .then((res) => {
+      .then(() => {
         setConnectedDevice(device);
         setConnecting(false);
         setDeviceToConnect({});
@@ -136,12 +111,12 @@ const Bluetooth = (props) => {
   // console.log('blutoothEnabled', blutoothEnabled);
   // console.log('loading', loading);
   // console.log('pairedDevices', pairedDevices);
-  console.log('availableDevieces', availableDevices);
+  // console.log('availableDevieces', availableDevices);
 
   const renderItem = (item) => (
     <TouchableOpacity onPress={() => connect(item.item)}>
       <View style={styles.list}>
-        <Entypo size={20} color={theme.colors.accent} name="mobile" {...props} />
+        <Entypo size={20} color={theme.colors.accent} name="mobile" />
 
         <View style={styles.bordered}>
           <Text>{item.item.name ? item.item.name : item.item.id}</Text>
@@ -156,7 +131,7 @@ const Bluetooth = (props) => {
             item.item.id === connectedDevice.id &&
             item.item.name === connectedDevice.name && (
               <Block>
-                <Entypo size={20} color={theme.colors.accent} name="check" {...props} />
+                <Entypo size={20} color={theme.colors.accent} name="check" />
               </Block>
             )}
         </View>

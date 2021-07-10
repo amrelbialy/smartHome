@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -127,7 +128,7 @@ const StartUpNavigator = createStackNavigator(
 
 const MainNavigatior = createSwitchNavigator({
   Startup: StartUpNavigator,
-  // Login: LoginNavigator,
+  Login: LoginNavigator,
   Tabs,
 });
 export default createAppContainer(MainNavigatior);
