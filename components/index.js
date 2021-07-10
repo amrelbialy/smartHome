@@ -9,6 +9,7 @@ import DoorCard from './DoorCard';
 import FanCard from './FanCard';
 import PumpCard from './PumpCard';
 import AlarmCard from './AlarmCard';
+import Logo from './Logo';
 
 export {
   Block,
@@ -22,4 +23,5 @@ export {
   PumpCard,
   IotCard,
   AlarmCard,
+  Logo,
 };

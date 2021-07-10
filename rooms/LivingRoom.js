@@ -51,13 +51,9 @@ export default function LivingRoom() {
 
   return (
     <Content padder>
-      <LightCard
-        label="PANASONIC AC 3 P"
-        toggleSwitch={toggleLightSwitch}
-        isEnabled={isLightEnabled}
-      />
+      <LightCard toggleSwitch={toggleLightSwitch} isEnabled={isLightEnabled} />
 
-      <FanCard label="PANASONIC AC 3 P" toggleSwitch={toggleFanSwitch} isEnabled={isFanEnabled} />
+      <FanCard toggleSwitch={toggleFanSwitch} isEnabled={isFanEnabled} />
 
       <CurtainCard toggleSwitch={toggleCurtainSwitch} isEnabled={isCurtainEnabled} />
     </Content>

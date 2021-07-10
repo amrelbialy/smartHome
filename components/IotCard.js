@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Body } from 'native-base';
+import database from '@react-native-firebase/database';
+
 import Block from './Block';
 import Text from './Text';
-
 import { theme } from '../theme';
 
 const IotCard = () => {
@@ -49,6 +50,16 @@ const IotCard = () => {
     },
   ];
 
+  useEffect(() => {
+    const getValue = database().ref('ultrasonic_value');
+    getValue.on('value', (snapshot) => {
+      const value = snapshot.val();
+      console.log(value);
+      if (value) {
+        console.log(value);
+      }
+    });
+  }, []);
   const changeView = () => {
     if (currentView === 2) {
       setCurrentView(0);

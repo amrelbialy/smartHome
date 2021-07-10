@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet, AsyncStorage } from 'react-native';
 import { useDispatch } from 'react-redux';
-
+import Logo from '../components/Logo';
 import { theme } from '../theme';
 import * as authActions from '../store/actions/auth';
 
@@ -37,10 +37,15 @@ const StartupScreen = (props) => {
 
   return (
     <View style={styles.screen}>
+      <Logo />
       <ActivityIndicator size="large" color={theme.colors.accent} />
     </View>
   );
 };
+
+StartupScreen.navigationOptions = () => ({
+  headerShown: false,
+});
 
 const styles = StyleSheet.create({
   screen: {

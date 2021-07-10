@@ -6,6 +6,7 @@ import Background from '../components/Background';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
+import Logo from '../components/Logo';
 
 import { theme } from '../theme';
 import { emailValidator, passwordValidator, nameValidator } from '../utils/loginValidation';
@@ -30,6 +31,7 @@ export default function SignUp({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Logo />
       <Header>Create Account</Header>
       <TextInput
         label="Home ID"

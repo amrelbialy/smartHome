@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
+import Logo from '../components/Logo';
 
 import { theme } from '../theme';
 import { emailValidator, passwordValidator } from '../utils/loginValidation';
@@ -56,6 +57,7 @@ export default function LoginScreen({ navigation }) {
   //       <Logo />
   return (
     <View style={styles.container}>
+      <Logo />
       <Header>Please Log in</Header>
       <TextInput
         label="Email"

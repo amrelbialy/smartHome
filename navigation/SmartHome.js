@@ -19,7 +19,7 @@ import Garden from '../rooms/Garden';
 import Entrance from '../rooms/Entrance';
 import StartupScreen from '../screens/StartUpScreen';
 import SignUp from '../screens/SignUp';
-import Blutooth from '../screens/Blutooth';
+import Bluetooth from '../screens/Bluetooth';
 
 const SmartHome = createStackNavigator(
   {
@@ -41,10 +41,10 @@ const SmartHome = createStackNavigator(
 
 const bluetoothNavigator = createStackNavigator(
   {
-    Blutooth,
+    Bluetooth,
   },
   {
-    initialRouteName: 'Blutooth',
+    initialRouteName: 'Bluetooth',
   }
 );
 const alarmNavigator = createStackNavigator(
@@ -73,7 +73,7 @@ const Tabs = createBottomTabNavigator(
         ),
       },
     },
-    Blutooth: {
+    Bluetooth: {
       screen: bluetoothNavigator,
       navigationOptions: {
         tabBarIcon: (tabInfo) => (
@@ -121,11 +121,12 @@ const StartUpNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'StartupScreen',
+    headerShown: false,
   }
 );
 
 const MainNavigatior = createSwitchNavigator({
-  // Startup: StartUpNavigator,
+  Startup: StartUpNavigator,
   // Login: LoginNavigator,
   Tabs,
 });

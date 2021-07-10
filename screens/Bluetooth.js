@@ -6,22 +6,20 @@ import {
   FlatList,
   ActivityIndicator,
   StyleSheet,
-  Button,
   View,
 } from 'react-native';
 // import {Text} from 'native-base';
 // import { LineChart, Path } from 'react-native-svg-charts';
 // import * as shape from 'd3-shape';
-import { Content, Text, Card, CardItem, Body, Switch, Right } from 'native-base';
+import { Text, Card, CardItem, Switch } from 'native-base';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { theme } from '../theme';
 import { Block } from '../components';
 
-const _ = require('lodash');
 // import rooms from '../rooms';
 
-const Blutooth = (props) => {
+const Bluetooth = (props) => {
   const [blutoothEnabled, setBlutooth] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pairedDevices, setPairedDevices] = useState([]);
@@ -241,13 +239,11 @@ const Blutooth = (props) => {
   );
 };
 
-Blutooth.navigationOptions = (navData) => ({
-  headerTitle: 'Blutooth Connection',
+Bluetooth.navigationOptions = () => ({
+  headerShown: false,
 });
 
-Blutooth.defaultProps = {};
-
-export default Blutooth;
+export default Bluetooth;
 
 const styles = StyleSheet.create({
   blutoothClosed: {
