@@ -122,7 +122,6 @@ const StartUpNavigator = createStackNavigator(
   },
   {
     initialRouteName: 'StartupScreen',
-    headerShown: false,
   }
 );
 

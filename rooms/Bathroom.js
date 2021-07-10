@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import { StyleSheet } from 'react-native';
 import { Content } from 'native-base';
 
+import database from '@react-native-firebase/database';
 import { LightCard } from '../components';
 
 import { send } from '../services/ButoothService';
@@ -10,6 +11,13 @@ import devices from '../utils/devices';
 export default function Bathroom() {
   const [isLightEnabled, setLight] = useState(false);
 
+  // database()
+  // .ref('/users/123')
+  // .set({
+  //   name: 'Ada Lovelace',
+  //   age: 31,
+  // })
+  // .then(() => console.log('Data set.'));
   const toggleLightSwitch = () => {
     if (isLightEnabled) {
       send(devices.Light.off.bedroom).then(() => {
