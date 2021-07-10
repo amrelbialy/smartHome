@@ -18,13 +18,11 @@ export default {
     on: {
       garage: 'e',
       EntranceMainDoor: 'f',
-      EntranceSecondDoor: 'g',
       bedroom: 'h',
     },
     off: {
       garage: 'E',
       EntranceMainDoor: 'F',
-      EntranceSecondDoor: 'G',
       bedroom: 'H',
     },
   },
