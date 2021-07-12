@@ -44,7 +44,3 @@ export default function Bathroom() {
 Bathroom.navigationOptions = () => ({
   headerTitle: 'Bathroom',
 });
-
-// const styles = StyleSheet.create({
-
-// });

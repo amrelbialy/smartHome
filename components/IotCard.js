@@ -9,32 +9,95 @@ import { theme } from '../theme';
 
 const IotCard = () => {
   const [currentView, setCurrentView] = useState(0);
+  const [activeSensors, setActiveSensors] = useState(0);
+  const [inActiveSensors, setInActiveSensors] = useState(0);
+  // 8 values for checking active values
+  const [bathroomLed, setBathroomLed] = useState(false);
+  const [bedroomLed, setBedroomLed] = useState(false);
+  const [earthquakeAlarm, setEarthquakeAlarm] = useState(false);
+  const [fanTrigger, setFanTrigger] = useState(false);
+  const [pumpTrigger, setPumpTrigger] = useState(false);
+  const [fienceAlarm, setFienceAlarm] = useState(false);
+  const [fireAlarm, setFireAlarm] = useState(false);
+  const [kitchenLed, setKitchenLed] = useState(false);
+  const [livingRoomLed, setLivingRoomLed] = useState(false);
+  const [pHValue, setPHValue] = useState(0);
+  const [tempValue, setTempValue] = useState(0);
+  const [humidityValue, setHumidityValue] = useState(0);
+
+  const getDatabaseValues = (key, setState) => {
+    const getValue = database().ref(key);
+    getValue.on('value', (snapshot) => {
+      const value = snapshot.val();
+      console.log('first', key, value);
+      if (value) {
+        console.log('second', key, value);
+        setState(value);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getDatabaseValues('BathroomLed_Trigger_Str', setBathroomLed);
+    getDatabaseValues('BedroomLed_Trigger_Str', setBedroomLed);
+    getDatabaseValues('EarthaquackAlarm_Trigger_Str', setEarthquakeAlarm);
+    getDatabaseValues('Fan_Trigger_Str', setFanTrigger);
+    getDatabaseValues('Pump_Trigger_Str', setPumpTrigger);
+    getDatabaseValues('FienceAlarm_Trigger_Str', setFienceAlarm);
+    getDatabaseValues('FireAlarm_Trigger_Str', setFireAlarm);
+    getDatabaseValues('KitchenLed_Trigger_Str', setKitchenLed);
+    getDatabaseValues('LivingroomLed_Trigger_Str', setLivingRoomLed);
+    getDatabaseValues('PH_Reading_Str', setPHValue);
+    getDatabaseValues('Sensor_Read_Temp_Str', setTempValue);
+    getDatabaseValues('Sensor_Humidity_Str', setHumidityValue);
+  }, []);
   const iotValuesOne = [
     {
       label: 'Temprature',
-      value: '34',
+      value: tempValue || 0,
       subLabel: '°C',
     },
     {
       label: 'Humidity',
-      value: '40',
+      value: humidityValue || 0,
       // subLabel: '%rh',
     },
     {
       label: 'PH meter',
-      value: '4',
+      value: pHValue || 0,
       subLabel: 'pH',
     },
   ];
 
+  const sensorArr = [
+    bathroomLed,
+    bedroomLed,
+    earthquakeAlarm,
+    fanTrigger,
+    pumpTrigger,
+    fienceAlarm,
+    fireAlarm,
+    kitchenLed,
+    livingRoomLed,
+  ];
+
+  // eslint-disable-next-line array-callback-return
+  sensorArr.map((item) => {
+    if (item) {
+      setActiveSensors(activeSensors + 1);
+    } else {
+      setInActiveSensors(inActiveSensors + 1);
+    }
+  });
+
   const iotValuesTwo = [
     {
       label: 'Active',
-      value: '10',
+      value: activeSensors || 0,
     },
     {
       label: 'Inactive',
-      value: '8',
+      value: inActiveSensors || 0,
     },
     {
       label: 'Avg Temprature',
@@ -49,17 +112,6 @@ const IotCard = () => {
       value: '4',
     },
   ];
-
-  useEffect(() => {
-    const getValue = database().ref('ultrasonic_value');
-    getValue.on('value', (snapshot) => {
-      const value = snapshot.val();
-      console.log(value);
-      if (value) {
-        console.log(value);
-      }
-    });
-  }, []);
   const changeView = () => {
     if (currentView === 2) {
       setCurrentView(0);
