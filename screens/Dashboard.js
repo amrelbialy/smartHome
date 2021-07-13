@@ -84,7 +84,7 @@ const Dashboard = (props) => {
   );
 
   // eslint-disable-next-line no-shadow
-  const getUserName = (email) => email?.split('@');
+  const getUserName = (email) => email?.split('@')[0];
 
   return (
     <Block style={styles.dashboard}>
@@ -92,7 +92,7 @@ const Dashboard = (props) => {
         <Block column space="between" style={{ marginHorizontal: theme.sizes.base * 2 }}>
           <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
             <Text style={{ fontSize: 30, color: '#A7A7A7' }}>Hello,</Text>
-            <Text style={{ fontSize: 50, fontWeight: '700' }}>{getUserName(email)}!</Text>
+            <Text style={{ fontSize: 50, fontWeight: '700' }}>{getUserName(email)}</Text>
           </Block>
           <IotCard />
           {renderFirstRow()}

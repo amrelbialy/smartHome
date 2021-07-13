@@ -19,11 +19,11 @@ export default function Bathroom() {
   // .then(() => console.log('Data set.'));
   const toggleLightSwitch = () => {
     if (isLightEnabled) {
-      send(devices.Light.off.bedroom).then(() => {
+      send(devices.Light.off.bathroom).then(() => {
         setLight(false);
       });
     } else {
-      send(devices.Light.on.bedroom).then(() => {
+      send(devices.Light.on.bathroom).then(() => {
         setLight(true);
       });
     }

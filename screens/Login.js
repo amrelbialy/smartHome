@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, StyleSheet, View, Alert, ActivityIndicator } from 'react-native';
-import { Text } from 'react-native-paper';
+import { Text, Button } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 
 import Header from '../components/Header';
-import Button from '../components/Button';
+// import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import Logo from '../components/Logo';
 
@@ -83,7 +83,11 @@ export default function LoginScreen({ navigation }) {
       {isLoading ? (
         <ActivityIndicator size="large" color={theme.colors.accent} />
       ) : (
-        <Button mode="contained" onPress={onLoginPress}>
+        <Button
+          mode="contained"
+          style={{ width: '100%', backgroundColor: theme.colors.accent }}
+          onPress={onLoginPress}
+        >
           <Text style={{ color: 'white' }}>Login</Text>
         </Button>
       )}

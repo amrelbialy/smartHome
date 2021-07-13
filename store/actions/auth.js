@@ -8,9 +8,9 @@ export const LOGOUT = 'LOGOUT';
 
 let timer;
 
-export const authenticate = (userId, token, expiryTime) => (dispatch) => {
+export const authenticate = (userId, token, email, expiryTime) => (dispatch) => {
   dispatch(setLogoutTimer(expiryTime));
-  dispatch({ type: AUTHENTICATE, userId, token });
+  dispatch({ type: AUTHENTICATE, userId, email, token });
 };
 
 export const signup = (email, password) => async (dispatch) => {
@@ -75,7 +75,6 @@ export const login = (email, password) => async (dispatch) => {
   }
 
   const resData = await response.json();
-  console.log(resData);
   dispatch(
     authenticate(
       resData.localId,

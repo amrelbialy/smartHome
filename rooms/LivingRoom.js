@@ -11,15 +11,14 @@ export default function LivingRoom() {
   const [isLightEnabled, setLight] = useState(false);
   const [isFanEnabled, setFan] = useState(false);
   const [isCurtainEnabled, setCurtain] = useState(false);
-  const [direction, setDirection] = useState(20);
 
   const toggleLightSwitch = () => {
     if (isLightEnabled) {
-      send(devices.Light.off.bedroom).then(() => {
+      send(devices.Light.off.livingRoom).then(() => {
         setLight(false);
       });
     } else {
-      send(devices.Light.on.bedroom).then(() => {
+      send(devices.Light.on.livingRoom).then(() => {
         setLight(true);
       });
     }
@@ -39,11 +38,11 @@ export default function LivingRoom() {
 
   const toggleCurtainSwitch = () => {
     if (isCurtainEnabled) {
-      send(devices.curtains.off.bedroom).then(() => {
+      send(devices.curtains.off.livingRoom).then(() => {
         setCurtain(false);
       });
     } else {
-      send(devices.curtains.on.bedroom).then(() => {
+      send(devices.curtains.on.livingRoom).then(() => {
         setCurtain(true);
       });
     }
