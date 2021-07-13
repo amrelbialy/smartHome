@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-
-import { useDispatch } from 'react-redux';
+import { Button } from 'react-native-paper';
 import { theme } from '../theme';
 import { Block, Text } from '../components';
 
-import Button from '../components/Button';
+// import Button from '../components/Button';
 
 const Alarm = () => {
   const handleAlarm = () => {
@@ -14,7 +13,11 @@ const Alarm = () => {
 
   return (
     <Block flex={1} style={styles.settings}>
-      <Button mode="contained" onPress={() => handleAlarm()}>
+      <Button
+        mode="contained"
+        onPress={() => handleAlarm()}
+        style={{ width: '100%', backgroundColor: theme.colors.accent }}
+      >
         <Text style={{ color: 'white' }}>Alarm Off</Text>
       </Button>
     </Block>

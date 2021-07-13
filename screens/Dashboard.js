@@ -84,8 +84,13 @@ const Dashboard = (props) => {
   );
 
   // eslint-disable-next-line no-shadow
-  const getUserName = (email) => email?.split('@')[0];
-
+  const getUserName = (email) => {
+    if (email && typeof email === 'string') {
+      return email.split('@')[0];
+    } else {
+      return 'amrelbialy26';
+    }
+  };
   return (
     <Block style={styles.dashboard}>
       <ScrollView contentContainerStyle={styles.mainStyles} showsVerticalScrollIndicator={false}>
