@@ -1,21 +1,17 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Button as PaperButton } from 'react-native-paper'
-import { theme } from '../theme'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Button as PaperButton } from 'react-native-paper';
+import { theme } from '../theme';
 
-export default function Button({ mode, style, ...props }) {
+// eslint-disable-next-line react/prop-types
+export default function Button({ mode, style }) {
   return (
     <PaperButton
-      style={[
-        styles.button,
-        { backgroundColor: theme.colors.accent },
-        style,
-      ]}
+      style={[styles.button, { backgroundColor: theme.colors.accent }, style]}
       labelStyle={styles.text}
       mode={mode}
-      {...props}
     />
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -29,4 +25,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 26,
   },
-})
+});

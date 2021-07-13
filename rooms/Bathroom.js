@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 // import { StyleSheet } from 'react-native';
 import { Content } from 'native-base';
 
-import database from '@react-native-firebase/database';
 import { LightCard } from '../components';
 
 import { send } from '../services/ButoothService';

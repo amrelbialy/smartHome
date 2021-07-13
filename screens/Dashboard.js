@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { theme } from '../theme';
 import { Block, DashboardCard, IotCard, Text } from '../components';
@@ -8,6 +9,7 @@ import rooms from '../rooms';
 
 const Dashboard = (props) => {
   const { navigation } = props;
+  const email = useSelector((state) => state.auth.email);
   const BedroomIcon = rooms.bedroom.icon;
   const GarageIcon = rooms.garage.icon;
   const GardenIcon = rooms.garden.icon;
@@ -80,13 +82,17 @@ const Dashboard = (props) => {
       </DashboardCard>
     </Block>
   );
+
+  // eslint-disable-next-line no-shadow
+  const getUserName = (email) => email?.split('@');
+
   return (
     <Block style={styles.dashboard}>
       <ScrollView contentContainerStyle={styles.mainStyles} showsVerticalScrollIndicator={false}>
         <Block column space="between" style={{ marginHorizontal: theme.sizes.base * 2 }}>
           <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
             <Text style={{ fontSize: 30, color: '#A7A7A7' }}>Hello,</Text>
-            <Text style={{ fontSize: 50, fontWeight: '700' }}>Amr!</Text>
+            <Text style={{ fontSize: 50, fontWeight: '700' }}>{getUserName(email)}!</Text>
           </Block>
           <IotCard />
           {renderFirstRow()}

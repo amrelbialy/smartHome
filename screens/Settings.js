@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyleSheet, TouchableWithoutFeedback, Slider } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { useSelector, useDispatch } from 'react-redux';
+import { StyleSheet } from 'react-native';
+
+import { useDispatch } from 'react-redux';
 import { theme } from '../theme';
-import { Block, Text, PanSlider } from '../components';
+import { Block, Text } from '../components';
 import * as authActions from '../store/actions/auth';
 import Button from '../components/Button';
-
-import rooms from '../rooms';
 
 const Settings = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -38,7 +36,4 @@ const styles = StyleSheet.create({
   settings: {
     padding: theme.sizes.base * 2,
   },
-  // slider: {
-
-  // }
 });

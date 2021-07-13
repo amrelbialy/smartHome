@@ -36,6 +36,13 @@ const IotCard = () => {
       }
     });
   };
+  const changeView = () => {
+    if (currentView === 2) {
+      setCurrentView(0);
+    } else {
+      setCurrentView(currentView + 1);
+    }
+  };
 
   useEffect(() => {
     getDatabaseValues('BathroomLed_Trigger_Str', setBathroomLed);
@@ -54,17 +61,17 @@ const IotCard = () => {
   const iotValuesOne = [
     {
       label: 'Temprature',
-      value: tempValue || 0,
+      value: (tempValue && typeof tempValue === 'number') || 0,
       subLabel: '°C',
     },
     {
       label: 'Humidity',
-      value: humidityValue || 0,
+      value: (humidityValue && typeof humidityValue === 'number') || 0,
       // subLabel: '%rh',
     },
     {
       label: 'PH meter',
-      value: pHValue || 0,
+      value: (pHValue && typeof pHValue === 'number') || 0,
       subLabel: 'pH',
     },
   ];
@@ -82,13 +89,13 @@ const IotCard = () => {
   ];
 
   // eslint-disable-next-line array-callback-return
-  sensorArr.map((item) => {
-    if (item) {
-      setActiveSensors(activeSensors + 1);
-    } else {
-      setInActiveSensors(inActiveSensors + 1);
-    }
-  });
+  // sensorArr.map((item) => {
+  //   if (item) {
+  //     setActiveSensors(activeSensors + 1);
+  //   } else {
+  //     setInActiveSensors(inActiveSensors + 1);
+  //   }
+  // });
 
   const iotValuesTwo = [
     {
@@ -112,13 +119,7 @@ const IotCard = () => {
       value: '4',
     },
   ];
-  const changeView = () => {
-    if (currentView === 2) {
-      setCurrentView(0);
-    } else {
-      setCurrentView(currentView + 1);
-    }
-  };
+
   return (
     <Card style={styles.main}>
       <CardItem>

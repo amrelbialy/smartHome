@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { TextInput as Input } from 'react-native-paper';
 import { theme } from '../theme';
 
+// eslint-disable-next-line react/prop-types
 export default function TextInput({ errorText, description, ...props }) {
   return (
     <View style={styles.container}>
@@ -11,6 +12,7 @@ export default function TextInput({ errorText, description, ...props }) {
         selectionColor={theme.colors.accent}
         underlineColor="transparent"
         mode="outlined"
+        // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
       {description && !errorText ? <Text style={styles.description}>{description}</Text> : null}

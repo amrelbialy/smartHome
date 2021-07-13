@@ -13,8 +13,40 @@ export const authenticate = (userId, token, expiryTime) => (dispatch) => {
   dispatch({ type: AUTHENTICATE, userId, token });
 };
 
+export const signup = (email, password) => async (dispatch) => {
+  const response = await fetch(
+    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD7qOLyYQw93Oj_j4WmTyMQPw8XTE3TiTI',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+        returnSecureToken: true,
+      }),
+    }
+  );
+
+  if (!response.ok) {
+    const errorResData = await response.json();
+    const errorId = errorResData.error.message;
+    let message = 'Something went wrong!';
+    if (errorId === 'EMAIL_EXISTS') {
+      message = 'This email exists already!';
+    }
+    throw new Error(message);
+  }
+
+  const resData = await response.json();
+
+  dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
+  const expirationDate = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000);
+  saveDataToStorage(resData.idToken, resData.localId, expirationDate);
+};
+
 export const login = (email, password) => async (dispatch) => {
-  console.log('info', email, password);
   const response = await fetch(
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD7qOLyYQw93Oj_j4WmTyMQPw8XTE3TiTI',
     {
@@ -29,7 +61,7 @@ export const login = (email, password) => async (dispatch) => {
       }),
     }
   );
-  console.log(response);
+
   if (!response.ok) {
     const errorResData = await response.json();
     const errorId = errorResData.error.message;
@@ -44,7 +76,14 @@ export const login = (email, password) => async (dispatch) => {
 
   const resData = await response.json();
   console.log(resData);
-  dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
+  dispatch(
+    authenticate(
+      resData.localId,
+      resData.idToken,
+      resData.email,
+      parseInt(resData.expiresIn) * 1000
+    )
+  );
   const expirationDate = new Date(new Date().getTime() + parseInt(resData.expiresIn) * 1000);
   saveDataToStorage(resData.idToken, resData.localId, expirationDate);
 };

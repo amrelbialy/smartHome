@@ -1,10 +1,11 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Text } from 'react-native-paper'
-import { theme } from '../theme'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Text } from 'react-native-paper';
+import { theme } from '../theme';
 
 export default function Header(props) {
-  return <Text style={styles.header} {...props} />
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <Text style={styles.header} {...props} />;
 }
 
 const styles = StyleSheet.create({
@@ -14,4 +15,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingVertical: 12,
   },
-})
+});

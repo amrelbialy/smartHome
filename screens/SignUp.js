@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import Background from '../components/Background';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -12,6 +11,7 @@ import { theme } from '../theme';
 import { emailValidator, passwordValidator, nameValidator } from '../utils/loginValidation';
 
 export default function SignUp({ navigation }) {
+  const [homeId, setHomeId] = useState({ value: '', error: '' });
   const [name, setName] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
@@ -36,10 +36,10 @@ export default function SignUp({ navigation }) {
       <TextInput
         label="Home ID"
         returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={name.error}
+        value={homeId.value}
+        onChangeText={(text) => setHomeId({ value: text, error: '' })}
+        error={!!homeId.error}
+        errorText={homeId.error}
       />
       <TextInput
         label="Name"

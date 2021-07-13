@@ -126,8 +126,8 @@ const StartUpNavigator = createStackNavigator(
 );
 
 const MainNavigatior = createSwitchNavigator({
-  Startup: StartUpNavigator,
-  Login: LoginNavigator,
+  // Startup: StartUpNavigator,
+  // Login: LoginNavigator,
   Tabs,
 });
 export default createAppContainer(MainNavigatior);

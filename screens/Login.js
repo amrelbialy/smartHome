@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
   };
   const loginHandler = async () => {
     // let action;
-    // if (isSignup) {
+    // if ( ) {
     //   action = authActions.signup(formState.inputValues.email, formState.inputValues.password);
     // } else {
     //   action = authActions.login(email, password);
@@ -53,8 +53,7 @@ export default function LoginScreen({ navigation }) {
       Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
     }
   }, [error]);
-  //  <BackButton goBack={navigation.goBack} />
-  //       <Logo />
+
   return (
     <View style={styles.container}>
       <Logo />
